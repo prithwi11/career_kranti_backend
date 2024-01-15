@@ -16,3 +16,5 @@ router.post('/addCategory', async(req, res) => {
         res.json({'success' : false, 'status' : util.STATUS_CODE.PARAMETER_MISSING, 'message' : 'Parameter missing', 'response' : null})
     }
 })
+
+module.exports = router

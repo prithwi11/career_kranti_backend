@@ -16,4 +16,5 @@ module.exports.addCategory = (data) => {
         errcounter++
         console.log('category_level is missing')
     }
+    return errcounter <= 0;
 }

@@ -9,7 +9,7 @@ const logIncomingRequests = async(req, res, next) => {
 
 const createJWTToken = async(data) => {
     data.reqtime = Date.now()
-
+    let secret = JWT_SECRET_KEY
     return jwt.sign(data, secret)
 }
 
