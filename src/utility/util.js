@@ -1,0 +1,10 @@
+const STATUS_CODE = {
+    SUCCESS : 200,
+    SOME_ERROR_OCCURRED : 500,
+    INTERNAL_SERVER_ERROR : 500,
+    PARAMETER_MISSING : 400
+}
+
+module.exports = {
+    STATUS_CODE : STATUS_CODE
+}

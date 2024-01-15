@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const dotenv = require('dotenv').config()
 const path = require('path')
 const BASEPATH = path.resolve(__dirname)
@@ -19,6 +20,14 @@ const omitTokenPath = [
 
 const PORT = process.env.PORT
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
+const SALT_ROUNDS = Number(process.env.SALT_ROUNDS)
+
+// const hashpassword = () => {
+//     bcrypt.genSalt(SALT_ROUNDS).then(salt => {
+//         console.log(salt)
+//     })
+// }
+// hashpassword()
 
 module.exports = {
     CONTROLLER_PATH : CONTROLLER_PATH,
