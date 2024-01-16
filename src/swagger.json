@@ -1,0 +1,185 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": " API",
+        "description": " Application API"
+    },
+    "host": "http://localhost:5500",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Login",
+            "description": "API for login operations in the system"
+        },
+        {
+            "name": "Category",
+            "description": "API for Category operations in the system"
+        },
+        {
+            "name": "User",
+            "description": "API for User relation APIs in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/v1/login": {
+            "post": {
+                "summary": "Log In",
+                "tags": [
+                    "Login"
+                ],
+                "description": "signin",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "user signin",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "UserDetails": {
+                                    "type": "object",
+                                    "$ref": "#/definitions/signInReq"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/auth"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/payload"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid Email",
+                        "schema": {
+                            "$ref": "#/definitions/invalidError"
+                        }
+                    },
+                    "402": {
+                        "description": "Invalid Password",
+                        "schema": {
+                            "$ref": "#/definitions/invalidError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions" : {
+        "signInReq":{
+            "type":"object",
+            "required":[
+                "email",
+                "password"
+            ],
+            "properties":{
+                "email":{
+                    "type":"integer"
+                },
+                "password":{
+                    "type":"string"
+                }
+            },
+            "auth": {
+                "type": "object",
+                "properties": {
+                    "userid": {
+                        "type": "string"
+                    },
+                    "usertypeid": {
+                        "type": "integer"
+                    },
+                    "reqtime": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "payload": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "countrycode": {
+                        "type": "string"
+                    },
+                    "reqtime": {
+                        "type": "integer"
+                    },
+                    "usertypeid": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "success": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                }
+            },
+             "invalidError": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "unauthorizedError": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+        }
+    }
+}

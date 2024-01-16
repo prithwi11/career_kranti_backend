@@ -16,6 +16,7 @@ const MYSQL_CONFIG = {
 const omitTokenPath = [
     '/v1/login',
     '/v1/testAPI',
+    '/api-docs/'
 ]
 
 const PORT = process.env.PORT

@@ -16,11 +16,11 @@ module.exports.login = async(data) => {
                     return {'success' : true, 'status' : util.STATUS_CODE.SUCCESS, 'message' : 'User Logged in successfully', 'response' : checkEmail}                    
                 }
                 else {
-                    return {'success' : false, 'status' : 500, 'message' : 'Wrong Password entered', 'response' : null}                    
+                    return {'success' : false, 'status' : util.STATUS_CODE.RECORDS_MISMATCH_1, 'message' : 'Wrong Password entered', 'response' : null}                    
                 }
             }
             else {
-                return {'success' : false, 'status' : 500, 'message' : 'No Email Found', 'response' : null}        
+                return {'success' : false, 'status' : util.STATUS_CODE.RECORDS_MISMATCH_2, 'message' : 'No Email Found', 'response' : null}        
             }
         }
         else {

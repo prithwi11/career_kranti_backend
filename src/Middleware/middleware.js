@@ -14,6 +14,9 @@ const createJWTToken = async(data) => {
 }
 
 const authenticateToken = async(req, res, next) => {
+    if (req.url.startsWith('/api-docs')) {
+        return next();
+    }
     if (!config.omitTokenPath.includes(req.url)) {
         const authHeader = req.headers['authorization']
         const token = authHeader && authHeader.split(' ')[1]
@@ -36,7 +39,7 @@ const authenticateToken = async(req, res, next) => {
 }
 
 const extractJWTToken = async (data) => {
-    let secret = data.secret ? data.secret : process.env.JWT_KEY;
+    let secret = data.secret ? data.secret : process.env.JWT_SECRET_KEY;
     delete data.secret;
     try {
         return jwt.verify(data.payload, secret)

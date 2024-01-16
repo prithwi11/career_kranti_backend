@@ -12,3 +12,15 @@ module.exports.addCategory = async(data) => {
         return false
     }
 }
+
+module.exports.checkCategory = async(data) => {
+    const sql = "SELECT category_id FROM career_category_master WHERE category_name = ?"
+    try {
+        const [resp] = await readPool.query(sql, [data.category_name])
+        return resp
+    }
+    catch(e) {
+        console.log(e)
+        return false
+    }
+}
