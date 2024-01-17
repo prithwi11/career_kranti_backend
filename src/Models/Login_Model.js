@@ -2,6 +2,8 @@ const login_dao = require('../Daos/Login_Dao')
 const bcrypt = require('../utility/bcrypt')
 const util = require('../utility/util')
 const middleware = require('../Middleware/middleware')
+const logger = require('../winston.js')
+const jest = require('jest')
 
 module.exports.login = async(data) => {
     try {
@@ -13,9 +15,11 @@ module.exports.login = async(data) => {
                 if (checkPassword) {
                     const token = await middleware.createJWTToken(checkEmail[0])
                     checkEmail[0].token = token
+                    logger.info('User logged in', {checkEmail})
                     return {'success' : true, 'status' : util.STATUS_CODE.SUCCESS, 'message' : 'User Logged in successfully', 'response' : checkEmail}                    
                 }
                 else {
+                    logger.error('Wrong Password entered')
                     return {'success' : false, 'status' : util.STATUS_CODE.RECORDS_MISMATCH_1, 'message' : 'Wrong Password entered', 'response' : null}                    
                 }
             }

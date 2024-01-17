@@ -1,4 +1,4 @@
-const swaggerAutogen = require('swagger-autogen');
+const swaggerAutogen = require('swagger-autogen')({openapi : '3.0.0'});
 const fs = require('fs')
 const config = require('./config')
 const CONTROLLER_PATH = config.CONTROLLER_PATH
@@ -16,12 +16,25 @@ try {
     console.error('err', err);
 }
 const doc = {
-  info: {
-    title: 'My API',
-    description: 'Description'
+  info : {
+    version : '1.0.0',
+    title : 'REST API Documentation',
+    description : 'Check for all the API details'
   },
-  host: 'localhost:5500'
-};
+  servers : [
+    {
+      url : 'http://localhost:5500',
+      description : ''
+    }
+  ],
+  tags : [
+    {
+      name : 'Sample Tag',
+      description : 'Sample Tag Description'
+    },
+  ],
+  components : {}
+}
 
 const outputFile = './swagger-output.json';
 const routes = fileArr;
